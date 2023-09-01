@@ -1,36 +1,55 @@
-import { Formik, Field, Form } from 'formik';
-import { InputWrapper } from 'components/InputWrapper/InputWrapper';
+import { ErrorMessage, Formik, Field } from 'formik';
+import * as Yup from 'yup';
+import { nanoid } from 'nanoid';
 
-export const ContactForm = () => {
+import { InputWrapper } from 'components/InputWrapper/InputWrapper';
+import { StyledForm } from './ContactForm.styled';
+
+const validation = Yup.object().shape({
+  name: Yup.string()
+    .matches(/^[a-zA-Zа-яА-ЯіІїЇєЄёЁґҐ\s'-]+$/, 'Please input correct name.')
+    .required('Required'),
+  number: Yup.string()
+    .matches(
+      /^[0-9\s()+-]+$/,
+      'Please input correct tel. Contain spaces, dashes, parentheses, and can start with +'
+    )
+    .required('Required'),
+});
+
+export const ContactForm = ({ addContact }) => {
   return (
     <div>
       <Formik
-        initialValues={{ name: '', contacts: [] }}
-        onSubmit={values => {
+        initialValues={{ name: '', number: '' }}
+        validationSchema={validation}
+        onSubmit={(values, actions) => {
           console.log(values);
+          addContact({ ...values, id: nanoid() });
+          actions.resetForm();
         }}
       >
-        <Form>
+        <StyledForm>
           <InputWrapper title="Name">
             <Field
               type="text"
               name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
             />
+            <ErrorMessage name="name" component="div" />
           </InputWrapper>
           <InputWrapper title="Number">
             <Field
               type="tel"
-              name="contacts"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              name="number"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
             />
+            <ErrorMessage name="number" component="div" />
           </InputWrapper>
           <button type="submit">Submit</button>
-        </Form>
+        </StyledForm>
       </Formik>
     </div>
   );
