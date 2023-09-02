@@ -1,24 +1,14 @@
-import { useState } from 'react';
+import { StyledWrapper, StyledInput, StyledTitle } from './Filter.styled';
 
-export const Filter = ({ onFilterChange }) => {
-  const [filert, setFilter] = useState('');
-
-  // Обробник подій для зміни значення фільтра
-  const handleInputChange = evt => {
-    const value = evt.target.value;
-    setFilter(value);
-    onFilterChange(value);
-    // console.log(value);
-  };
-
+export const Filter = ({ onFilterChange, value }) => {
   return (
-    <div>
-      <p>Find contacts by name</p>
-      <input
+    <StyledWrapper>
+      <StyledTitle>Find contacts by name</StyledTitle>
+      <StyledInput
         type="text"
-        value={filert}
-        onChange={handleInputChange}
-      ></input>
-    </div>
+        value={value}
+        onChange={evt => onFilterChange(evt.target.value)}
+      ></StyledInput>
+    </StyledWrapper>
   );
 };

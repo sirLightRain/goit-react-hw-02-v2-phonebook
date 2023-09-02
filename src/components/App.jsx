@@ -75,7 +75,7 @@ export class App extends Component {
         <ContactFormComponent addContact={this.addContact} />
 
         <h2>Contacts</h2>
-        <Filter onFilterChange={this.handleFiltrChange} />
+        <Filter value={filter} onFilterChange={this.handleFiltrChange} />
 
         <ContactList
           contacts={filteredContacts}

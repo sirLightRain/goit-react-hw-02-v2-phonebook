@@ -7,7 +7,10 @@ import {
   StyledForm,
   StyledErrorMessage,
   StyledField,
+  StyledButton,
 } from './ContactForm.styled';
+
+import { useRef } from 'react';
 
 const validation = Yup.object().shape({
   name: Yup.string()
@@ -22,16 +25,22 @@ const validation = Yup.object().shape({
 });
 
 export const ContactForm = ({ addContact }) => {
+  // Створюємо посилання на кнопку "Add contact"
+  const buttonRef = useRef(null);
+
   return (
     <div>
       <Formik
         initialValues={{ name: '', number: '' }}
         validationSchema={validation}
         onSubmit={(values, actions) => {
-          // console.log(values);
           // Передаємо сформований обєкт у state і додаємо унікальний ID
           addContact({ ...values, id: nanoid() });
           actions.resetForm();
+          // Знімаємо фокус з кнопки після натискання
+          if (buttonRef.current) {
+            buttonRef.current.blur();
+          }
         }}
       >
         <StyledForm>
@@ -53,7 +62,9 @@ export const ContactForm = ({ addContact }) => {
             />
             <StyledErrorMessage name="number" component="div" />
           </InputWrapper>
-          <button type="submit">Add conact</button>
+          <StyledButton type="submit" ref={buttonRef}>
+            Add contact
+          </StyledButton>
         </StyledForm>
       </Formik>
     </div>
