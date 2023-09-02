@@ -8,7 +8,7 @@ export const Filter = ({ onFilterChange }) => {
     const value = evt.target.value;
     setFilter(value);
     onFilterChange(value);
-    console.log(value);
+    // console.log(value);
   };
 
   return (

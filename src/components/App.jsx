@@ -23,7 +23,6 @@ export class App extends Component {
 
   // Метод, щро дадає контакт у state.
   addContact = newContact => {
-
     const isDublicate = this.state.contacts.some(
       contact =>
         contact.name.toLowerCase() === newContact.name.toLowerCase() ||
@@ -35,7 +34,7 @@ export class App extends Component {
         'A contact with this name or number is already in the list!',
         {
           position: 'top-right',
-          autoClose: 1000,
+          autoClose: 2500,
         }
       );
       return;
@@ -58,6 +57,13 @@ export class App extends Component {
     });
   };
 
+  // Видалення контакту
+  handleDeleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
     const { contacts, filter } = this.state;
     const filteredContacts = this.filterContacts(contacts, filter);
@@ -70,7 +76,10 @@ export class App extends Component {
         <h2>Contacts</h2>
         <Filter onFilterChange={this.handleFiltrChange} />
 
-        <ContactList contacts={filteredContacts} />
+        <ContactList
+          contacts={filteredContacts}
+          onDeleteContact={this.handleDeleteContact}
+        />
 
         <ToastContainer />
         <GlobalStyle />
