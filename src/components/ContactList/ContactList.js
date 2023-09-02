@@ -1,14 +1,16 @@
+import { StyledWrapper, StyledLi, StyledButton } from './ContactList.styled';
+
 export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul>
+    <StyledWrapper>
       {contacts.map(item => (
-        <li key={item.id}>
-          {item.name}: {item.number}
-          <button type="button" onClick={() => onDeleteContact(item.id)}>
+        <StyledLi key={item.id}>
+          📱 {item.name}: {item.number}
+          <StyledButton type="button" onClick={() => onDeleteContact(item.id)}>
             DELETE
-          </button>
-        </li>
+          </StyledButton>
+        </StyledLi>
       ))}
-    </ul>
+    </StyledWrapper>
   );
 };

@@ -3,10 +3,11 @@ import styled from 'styled-components';
 export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4px;
-  width: 300px;
 
   margin-top: 24px;
+  margin-bottom: 16px;
   padding: 0px 8px 8px 8px;
 
   outline: 2px solid ${props => props.theme.colors.grey};
