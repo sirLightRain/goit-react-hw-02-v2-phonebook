@@ -24,7 +24,8 @@ export const ContactForm = ({ addContact }) => {
         initialValues={{ name: '', number: '' }}
         validationSchema={validation}
         onSubmit={(values, actions) => {
-          console.log(values);
+          // console.log(values);
+          // Передаємо сформований обєкт у state і додаємо унікальний ID
           addContact({ ...values, id: nanoid() });
           actions.resetForm();
         }}
@@ -48,7 +49,7 @@ export const ContactForm = ({ addContact }) => {
             />
             <ErrorMessage name="number" component="div" />
           </InputWrapper>
-          <button type="submit">Submit</button>
+          <button type="submit">Add conact</button>
         </StyledForm>
       </Formik>
     </div>
