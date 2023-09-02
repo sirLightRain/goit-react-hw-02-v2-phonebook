@@ -21,6 +21,20 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const savedContscts = localStorage.getItem('contacts');
+    if (savedContscts !== null) {
+
+      this.setState({ contacts: JSON.parse(savedContscts) });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   // Метод, щро дадає контакт у state.
   addContact = newContact => {
     const isDublicate = this.state.contacts.some(
