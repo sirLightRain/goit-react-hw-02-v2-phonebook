@@ -6,7 +6,10 @@ import { ThemeProvider } from 'styled-components';
 
 const theme = {
   colors: {
-    red: "orangered"
+    blue: 'lightblue',
+    yellow: '#c5c268',
+    grey: '#757575',
+    red: '#db0707',
   },
 };
 

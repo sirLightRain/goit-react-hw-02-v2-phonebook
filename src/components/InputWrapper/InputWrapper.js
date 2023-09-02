@@ -1,9 +1,10 @@
+import { StyledTitle } from "./InputWrapper.styled";
 
 export const InputWrapper = ({ title, children }) => {
   return (
     <div>
       <label>
-        <p>{title}</p>
+        <StyledTitle>{title}</StyledTitle>
         {children}
       </label>
     </div>

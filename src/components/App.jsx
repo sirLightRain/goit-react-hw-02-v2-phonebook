@@ -35,6 +35,7 @@ export class App extends Component {
         {
           position: 'top-right',
           autoClose: 2500,
+          theme: 'colored',
         }
       );
       return;
